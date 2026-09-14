@@ -1,0 +1,33 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  unit-tests:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show runner
+        run: |
+          echo "Runner: $(hostname)"
+          echo "Job started"
+
+      - name: Simulate long test
+        run: |
+          echo "Testing..."
+          sleep 60
+          echo "Test simulation finished"
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: |
+          ./run_tests.sh
