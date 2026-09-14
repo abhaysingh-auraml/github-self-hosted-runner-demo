@@ -2,6 +2,8 @@ name: Unit Tests
 
 on:
   pull_request:
+    branches:
+      - main
 
 jobs:
   unit-tests:
@@ -11,12 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show environment
+      - name: Show runner
         run: |
-          echo "Running on:"
-          hostname
-          echo "Python:"
-          python3 --version
+          echo "Runner: $(hostname)"
+          echo "Job started"
+
+      - name: Simulate long test
+        run: |
+          echo "Testing..."
+          sleep 60
+          echo "Test simulation finished"
 
       - name: Install dependencies
         run: |
